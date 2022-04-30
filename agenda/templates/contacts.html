@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="{% url 'create_contact' %}">New contact</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Número</th>
+            <th scope="col">Endereços</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for contact in contacts %}
+
+                <tr>
+                    <th scope="row">{{ contact.id }}</th>
+                    <td>
+                        <a href="{% url 'update_contact' contact.id %}">
+                            {{ contact.nome }}
+                        </a>    
+                    </td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>
+                        <a href="{% url 'list_addresses' contact.id %}">
+                            {{ contact.adresses_set.all|length }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
